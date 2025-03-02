@@ -1,6 +1,6 @@
 asgiref==3.7.2  # Latest stable as of writing
-Django==4.2.11 # Latest LTS as of writing
-django-cors-headers==4.3.1 # Latest stable as of writing
+Django==3.2.25 # Latest LTS as of writing
+django-cors-headers==3.2.21 # Latest stable as of writing
 djangorestframework==3.15.1 # Latest stable as of writing
 gunicorn==21.2.0 # Latest stable as of writing
 pytz==2024.1 # Latest stable as of writing
