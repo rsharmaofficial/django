@@ -7,7 +7,7 @@ WORKDIR /app/backend
 RUN yum update -y && \
     yum install -y \
     gcc \
-    mysql-devel \
+    mariadb-devel \
     pkgconfig \
     python3 \
     python3-pip \
@@ -29,5 +29,4 @@ COPY . /app/backend
 EXPOSE 8000
 
 # Run migrations and start the Django app
-CMD python3 manage.py migrate && \
-    python3 manage.py runserver 0.0.0.0:8000
+CMD ["sh", "-c", "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"]
