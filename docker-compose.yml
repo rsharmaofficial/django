@@ -1,9 +1,8 @@
-version: "3.8"
+version: "3.8.1"
 
 services:
   nginx:
-    build: ./nginx
-    image: nginx
+    image: nginx:latest  # Use a pre-built image instead of building
     container_name: "nginx_cont"
     ports:
       - "80:80"
@@ -20,7 +19,7 @@ services:
     container_name: "django_cont"
     ports:
       - "8000:8000"
-    command: sh -c "python manage.py migrate --noinput && gunicorn notesapp.wsgi --bind 0.0.0.0:8000"
+    command: sh -c "./wait-for-it.sh db:3306 -- python manage.py migrate --noinput && gunicorn notesapp.wsgi --bind 0.0.0.0:8000"
     env_file:
       - ".env"
     depends_on:
@@ -36,7 +35,7 @@ services:
       - notes-app-nw
 
   db:
-    image: mysql
+    image: mysql:5.7  # Specify MySQL version if necessary
     container_name: "db_cont"
     environment:
       - MYSQL_ROOT_PASSWORD=root

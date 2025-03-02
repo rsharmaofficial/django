@@ -1,17 +1,24 @@
+# Use Amazon Linux 2 as the base image
 FROM amazonlinux:2
 
 # Set the working directory in the container
 WORKDIR /app/backend
 
-# Install system dependencies using yum
+# Install system dependencies and Python 3.8
 RUN yum update -y && \
     yum install -y \
     gcc \
     mariadb-devel \
-    pkgconfig \
+    libpq-devel \
+    libffi-devel \
+    openssl-devel \
     python3 \
     python3-pip \
+    python3-devel \
     && yum clean all
+
+# Verify Python version
+RUN python3 --version
 
 # Ensure pip is up-to-date
 RUN python3 -m pip install --upgrade pip
